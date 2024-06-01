@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #efefef;
+  font-family: "Kanit", sans-serif;
+  font-weight: bold;
+}
+.navbar {
+  background: linear-gradient(135deg, #4c2889, #003b6f);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+h1 {
+  font-size: 32px;
+  text-align: center;
+}
+h2 {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a {
+  color: rgb(0, 234, 255);
+  text-decoration: underline;
+}
+p, button, input, textarea {
+  color: #6d6767;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+hr {
+  color: black;
+  size: 20px;
+}
+
+.logo {
+  background-color: #3a3222 !important;
+  padding: 10px;
+  border-radius: 10px;
+}
+.logo h1 {
+  font-size: 25px;
+}
+/* example: override wallet button style */
+.wallet-adapter-button:not([disabled]):hover {
+  background-color: #b2955e;
+}
+.wallet-adapter-button { 
+  border: 1px solid wheat;
+  min-width: fit-content;
+}
+
+.CreateFundraiser-btn {
+  color: white;
+  width: 200px;
+  height: 37px;
+  background: linear-gradient(135deg, #4c2889, #003b6f);
+  border-radius: 3px;
+}
+.CreateFundraiser-btn:hover {
+  background: linear-gradient(135deg, #003b6f, #4c2889);
+}
+
+
+.Details-form {
+  height: 400px;
+  width: 60%;
+  border: 1px solid black;
+  background-color: white;
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+input, textarea {
+  font-weight: normal;
+  width: 400px;
+  border: 1px solid black;
+  padding: 0 5px;
+}
+input:focus, textarea:focus {
+  outline: none;
+}
+.Details-form input {
+  height: 30px;
+  border-radius: 2px;
+}
+.Details-form textarea {
+  height: 100px;
+}
+
+
+
+
+.DataTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.DataTable__Header {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  text-align: left;
+  font-weight: normal;
+  width: 75px;
+  font-weight: bolder;
+}
+thead {
+  background: linear-gradient(135deg, #4c2889, #003b6f);
+
+}
+.DataTable__Header_Title {
+  width: 200px;
+}
+.DataTable__Row {
+  background-color: whitesmoke;
+  color: #6d6767;
+}
+.DataTable__Row:hover {
+  background-color: #b2955e;
+  cursor: pointer;
+}
+.Target-reached {
+  background-color: #2ac545;
+  color: #6d6767;
+}
+
+.DataTable__Cell {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+
+.Contribute-modal {
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: justify;
+}
+.Contribute-modal p {
+  color: white;
+  font-weight: normal;
+}
+.Contribute-btn {
+  background: none;
+  background-color: green;
+  margin-right: 10px;
+}
+.Closefund-btn {
+  background: none;
+  background-color: red;
+}
+.Contribute-btn:hover, .Closefund-btn:hover {
+  background: rgb(232, 216, 216);
+}
+.Closefund-btn:disabled {
+  background: grey;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.Btn-container {
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure the modal is above other content */
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #4c2889, #003b6f);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  width: 90vw;
+  height: 80vh;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+
+
+/* LOADER */
+.loader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000000; /* Ensure the loader is above other content */
+}
+
+.spinner {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #4c2889;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.End-description {
+  position: absolute;
+  bottom: 50px;
+  right: 30px
+}
+.Credits {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+.Credits a {
+  color: blue;
+}
