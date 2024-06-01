@@ -1,11 +1,5 @@
-/**
- * Program IDL in camelCase format in order to be used in JS/TS.
- *
- * Note that this is only a type helper and is not the actual IDL. The original
- * IDL can be found at `target/idl/crowdfund.json`.
- */
-export type Crowdfund = {
-  "address": "BQWAU4uYTxMzyLjjnp4YPaS1jvHmeUt6BqNrKZvzXD5r",
+{
+  "address": "CgUbsFCLHLK6df1Xfg9zPqFqsPRRM35QdpdvK9b87jMy",
   "metadata": {
     "name": "crowdfund",
     "version": "0.1.0",
@@ -14,7 +8,7 @@ export type Crowdfund = {
   },
   "instructions": [
     {
-      "name": "closeFundraiser",
+      "name": "close_fundraiser",
       "discriminator": [
         147,
         202,
@@ -27,12 +21,12 @@ export type Crowdfund = {
       ],
       "accounts": [
         {
-          "name": "crowdfundAuthority",
+          "name": "crowdfund_authority",
           "writable": true,
           "signer": true
         },
         {
-          "name": "crowdfundPda",
+          "name": "crowdfund_pda",
           "writable": true,
           "pda": {
             "seeds": [
@@ -42,13 +36,13 @@ export type Crowdfund = {
               },
               {
                 "kind": "account",
-                "path": "crowdfundAuthority"
+                "path": "crowdfund_authority"
               }
             ]
           }
         },
         {
-          "name": "systemProgram",
+          "name": "system_program",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -89,13 +83,13 @@ export type Crowdfund = {
               {
                 "kind": "account",
                 "path": "crowdfund.crowdfund_authority",
-                "account": "crowdFund"
+                "account": "CrowdFund"
               }
             ]
           }
         },
         {
-          "name": "systemPrgram",
+          "name": "system_prgram",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -124,12 +118,12 @@ export type Crowdfund = {
       ],
       "accounts": [
         {
-          "name": "crowdfundAuthority",
+          "name": "crowdfund_authority",
           "writable": true,
           "signer": true
         },
         {
-          "name": "crowdfundPda",
+          "name": "crowdfund_pda",
           "writable": true,
           "pda": {
             "seeds": [
@@ -139,13 +133,13 @@ export type Crowdfund = {
               },
               {
                 "kind": "account",
-                "path": "crowdfundAuthority"
+                "path": "crowdfund_authority"
               }
             ]
           }
         },
         {
-          "name": "systemProgram",
+          "name": "system_program",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -167,7 +161,7 @@ export type Crowdfund = {
   ],
   "accounts": [
     {
-      "name": "crowdFund",
+      "name": "CrowdFund",
       "discriminator": [
         153,
         206,
@@ -183,23 +177,23 @@ export type Crowdfund = {
   "errors": [
     {
       "code": 6000,
-      "name": "titleTooLong",
+      "name": "TitleTooLong",
       "msg": "Cannot initialize, title too long"
     },
     {
       "code": 6001,
-      "name": "descriptionTooLong",
+      "name": "DescriptionTooLong",
       "msg": "Cannot initialize, description too long"
     }
   ],
   "types": [
     {
-      "name": "crowdFund",
+      "name": "CrowdFund",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "crowdfundAuthority",
+            "name": "crowdfund_authority",
             "type": "pubkey"
           },
           {
@@ -226,4 +220,4 @@ export type Crowdfund = {
       }
     }
   ]
-};
+}
