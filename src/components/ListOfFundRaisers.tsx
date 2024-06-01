@@ -40,7 +40,7 @@ export const ListOfFundRaisers = () => {
             console.log(data)
             setLoading(false)
         })()
-    }, [ourWallet, data, program.account.crowdFund])
+    }, [ourWallet])
     const contributeToFundraiser = async (details) => {
         console.log(getProvider().publicKey, details.crowdFundAuthority)
         const amount = Number(prompt("Enter amount to contribute(in sol): "))
