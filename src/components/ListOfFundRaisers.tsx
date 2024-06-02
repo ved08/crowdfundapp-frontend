@@ -13,7 +13,6 @@ const idl_object = JSON.parse(idl_string)
 
 const programID = new PublicKey(idl.address)
 
-
 // const getString = bufferstr => String.fromCharCode.apply(null, bufferstr)
 export const ListOfFundRaisers = () => {
     const [data, setData] = useState([])
@@ -42,35 +41,39 @@ export const ListOfFundRaisers = () => {
         })()
     }, [ourWallet])
     const contributeToFundraiser = async (details) => {
-        console.log(getProvider().publicKey, details.crowdFundAuthority)
-        const amount = Number(prompt("Enter amount to contribute(in sol): "))
-        if (isNaN(amount)) alert("Enter valid number")
-        else {
-            // const [crowdfund_pkey, bump] = PublicKey.findProgramAddressSync([
-            //     Buffer.from(details.title),
-            //     details.crowdFundAuthority.toBuffer()
-            // ], programID)
-            // console.log(await connection.getBalance(crowdfund_pkey)/LAMPORTS_PER_SOL)
-            const anchProvider = getProvider()
-            // console.log(details.title.trim(), "Ved's Fundraiser")
-            setLoading(true)
-            try {
-                const tx = await program.methods.contribute(details.title, new BN(LAMPORTS_PER_SOL * amount))
-                .accountsStrict({
-                    contributor: anchProvider.publicKey,  
-                    crowdfund: new PublicKey(details.id),
-                    systemPrgram: SystemProgram.programId
-                }).rpc()
-        
-                console.log(tx)
+        if(ourWallet.connected) {
+            console.log(getProvider().publicKey, details.crowdFundAuthority)
+            const amount = Number(prompt("Enter amount to contribute(in sol): "))
+            if (isNaN(amount)) alert("Enter valid number")
+            else {
+                // const [crowdfund_pkey, bump] = PublicKey.findProgramAddressSync([
+                //     Buffer.from(details.title),
+                //     details.crowdFundAuthority.toBuffer()
+                // ], programID)
+                // console.log(await connection.getBalance(crowdfund_pkey)/LAMPORTS_PER_SOL)
+                const anchProvider = getProvider()
+                // console.log(details.title.trim(), "Ved's Fundraiser")
+                setLoading(true)
+                try {
+                    const tx = await program.methods.contribute(details.title, new BN(LAMPORTS_PER_SOL * amount))
+                    .accountsStrict({
+                        contributor: anchProvider.publicKey,  
+                        crowdfund: new PublicKey(details.id),
+                        systemPrgram: SystemProgram.programId
+                    }).rpc()
+            
+                    console.log(tx)
+                    setLoading(false)
+                    setShowModal(false)
+                } catch(e) {
+                    alert(e.message)
+                    setLoading(false)
+                }
                 setLoading(false)
-                setShowModal(false)
-            } catch(e) {
-                alert(e.message)
-                setLoading(false)
-            }
-            setLoading(false)
-            location.reload()
+                location.reload()
+        }
+        } else {
+            alert("Not connected to the wallet")
         }
     }
     const openModal = item => {
@@ -82,22 +85,27 @@ export const ListOfFundRaisers = () => {
         setShowModal(false)
     }
     const closeFundRaiser = async details => {
-        try {
-            setLoading(true)
-            const tx = await program.methods.closeFundraiser(details.title)
-            .accountsStrict({
-                crowdfundAuthority: getProvider().publicKey,
-                crowdfundPda: details.id,
-                systemProgram: SystemProgram.programId
-            })
-            .rpc({commitment: "processed"})
-            console.log("closed account: tx: ", tx)
-            setLoading(false)
-            setShowModal(false)
-            location.reload()
-        } catch(e) {
-            alert(e.message)
-            setLoading(false)
+        if(ourWallet.connected) {
+
+            try {
+                setLoading(true)
+                const tx = await program.methods.closeFundraiser(details.title)
+                .accountsStrict({
+                    crowdfundAuthority: getProvider().publicKey,
+                    crowdfundPda: details.id,
+                    systemProgram: SystemProgram.programId
+                })
+                .rpc({commitment: "processed"})
+                console.log("closed account: tx: ", tx)
+                setLoading(false)
+                setShowModal(false)
+                location.reload()
+            } catch(e) {
+                alert(e.message)
+                setLoading(false)
+            }
+        } else {
+            alert("Not connected to the wallet")
         }
     }
     return(
@@ -134,7 +142,7 @@ export const ListOfFundRaisers = () => {
                         <div className='Btn-container'>
                             <button className='CreateFundraiser-btn Contribute-btn' onClick={() => contributeToFundraiser(modalData)}>Contribute</button>
                             {
-                                modalData.crowdFundAuthority.toString() == getProvider().publicKey.toString() ? (
+                                modalData.crowdFundAuthority.toString() == getProvider().publicKey?.toString() ? (
                                     <div>
                                         <button className='CreateFundraiser-btn Closefund-btn' onClick={() => closeFundRaiser(modalData)}>Close fundraiser</button>
                                     </div>): 
